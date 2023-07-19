@@ -73,7 +73,7 @@ SELECT CASE WHEN donation = 500 THEN '500'
                         WHEN donation >= 300 AND donation < 400 THEN '300-399'
 			WHEN donation >= 200 AND donation < 300 THEN '200-399'
 			WHEN donation >= 100 AND donation < 200 THEN '100-199'
-			ELse 'under 100' END AS donatio_group, COUNT(*) count_donation
+			ELse 'under 100' END AS donation_group, COUNT(*) count_donation
 FROM donation_data
 GROUP BY 1;
 
