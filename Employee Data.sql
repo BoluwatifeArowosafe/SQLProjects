@@ -96,17 +96,18 @@ LIMIT 5;
 -- What is the total count of employees for each age group
 SELECT CASE WHEN age >= 20 AND age <= 25 THEN '20-25'
             WHEN age > 25 AND age <=30 THEN '26-30'
-            ELSE 'above 30'  END AS age_group, COUNT(*) AS employee_count
+            ELSE 'above 30'  END AS age_group,
+	    COUNT(*) AS employee_count
 FROM employee_data
 GROUP BY 1;
--- how many employees where hired in each year
+-- How many employees were hired in each year
 SELECT DATE_PART('year',date_of_hire) AS year, COUNT(*) AS employee_count
 FROM employee_data
 GROUP BY 1
 ORDER BY 1;
--- what is the number of employees who are in full-time, part-time,contractor and intern employment status in each job_level 
+-- What is the number of employees who are in full-time, part-time,contractor and intern employment status in each job_level 
 SELECT job_level,
-       COUNT(CASE WHEN employment_status = 'Full-Time' THEN 1 END) AS full_time,
+           COUNT(CASE WHEN employment_status = 'Full-Time' THEN 1 END) AS full_time,
 	   COUNT(CASE WHEN employment_status = 'Part_Time' THEN 1 END) AS part_time,
 	   COUNT(CASE WHEN employment_status = 'Contractor' THEN 1 END) AS contractor,
 	   COUNT(CASE WHEN employment_status = 'Intern' THEN 1 END) AS Intern
