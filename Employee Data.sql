@@ -108,13 +108,19 @@ ORDER BY 1;
 -- What is the number of employees who are in full-time, part-time,contractor and intern employment status in each job_level 
 SELECT job_level,
            COUNT(CASE WHEN employment_status = 'Full-Time' THEN 1 END) AS full_time,
-	   COUNT(CASE WHEN employment_status = 'Part_Time' THEN 1 END) AS part_time,
+	   COUNT(CASE WHEN employment_status = 'Part-Time' THEN 1 END) AS part_time,
 	   COUNT(CASE WHEN employment_status = 'Contractor' THEN 1 END) AS contractor,
 	   COUNT(CASE WHEN employment_status = 'Intern' THEN 1 END) AS Intern
 FROM employee_data ed
 JOIN employee_salary es
 ON  ed.id = es.emp_id
 GROUP BY 1;
+-- Find job titles with more than one employee
+SELECT job_title, count(*) AS count_employee
+FROM employee_data
+GROUP BY 1
+HAVING COUNT(*) > 1
+ORDER BY 2 DESC;
 	   
 
 
