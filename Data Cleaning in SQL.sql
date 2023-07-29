@@ -26,7 +26,7 @@ GROUP BY title_id
 HAVING COUNT(*) > 1;-- no duplicate found
 
 /* For release_year column: 
-- Handle missing and incorrect date
+- Handle incorrect date
 -  Convert from string to to a consistent date format */
 --  To show the release year column
 SELECT release_year
@@ -40,19 +40,6 @@ SET release_year = CASE
 						ELSE release_year
 						END;
 
--- To check for null values in the release year column
-SELECT release_year
-FROM imdb_data
-WHERE release_year IS NULL
--- Fill all the null values in the release year column with a sentinel date.
-UPDATE imdb_data
-SET release_year = COALESCE(release_year, '2050-01-01')
-WHERE release_year IS NULL;
-
--- To confirm changes
-SELECT release_year
-FROM imdb_data
-WHERE release_year = '2050-01-01';
 -- To convert the release_year column from string to date format and store the data in a new column
 ALTER TABLE imdb_data
 ADD COLUMN converted_release_date DATE;
